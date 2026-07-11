@@ -1,6 +1,6 @@
 # AI.GO Roadmap
 
-Visual learning path through the AI.GO curriculum (01-edu). Same content as [`ROADMAP_BEGINNERS.md`](ROADMAP_BEGINNERS.md), as a diagram instead of tables.
+Visual learning path through the AI.GO curriculum (01-edu). Same content as [`WORKFLOW.md`](WORKFLOW.md), as a diagram instead of tables.
 
 ```mermaid
 flowchart TD

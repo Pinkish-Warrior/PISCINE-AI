@@ -1,6 +1,6 @@
 # AI.GO — Technical Setup
 
-One-time setup for the whole roadmap ([`ROADMAP_BEGINNERS.md`](ROADMAP_BEGINNERS.md)). The curriculum is plain HTML/CSS/JavaScript — no build tools, no package.json, nothing to compile. Do this once before Step 1; every step after that reuses the same environment.
+One-time setup for the whole roadmap ([`WORKFLOW.md`](WORKFLOW.md)). The curriculum is plain HTML/CSS/JavaScript — no build tools, no package.json, nothing to compile. Do this once before Step 1; every step after that reuses the same environment.
 
 Pick the path that matches where you're working:
 
@@ -111,4 +111,4 @@ Open the printed `http://localhost:...` URL in the browser.
 - [ ] AI assistant account created
 - [ ] `npx serve .` (or opening `index.html`) shows a page in the browser
 
-Once all boxes are checked, start at Step 1 (`first-hello`) in [`ROADMAP_BEGINNERS.md`](ROADMAP_BEGINNERS.md) — task instructions live in [`01-edu/public/subjects/AI.GO/first-hello`](https://github.com/01-edu/public/tree/master/subjects/AI.GO/first-hello).
+Once all boxes are checked, start at Step 1 (`first-hello`) in [`WORKFLOW.md`](WORKFLOW.md) — task instructions live in [`01-edu/public/subjects/AI.GO/first-hello`](https://github.com/01-edu/public/tree/master/subjects/AI.GO/first-hello).

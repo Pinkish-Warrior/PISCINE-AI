@@ -1,6 +1,6 @@
-# AI.GO Beginner Roadmap
+# AI.GO Workflow
 
-A step-by-step path through the AI.GO curriculum (01-edu), built for students with **zero prior programming experience**. Table view of [`ROADMAP.md`](ROADMAP.md).
+A step-by-step path through the AI.GO curriculum (01-edu), built for students with **zero prior programming experience**. Table view of the diagram in [`ROADMAP.md`](ROADMAP.md).
 
 Haven't done the one-time setup yet? Go do [`SETUP.md`](SETUP.md) first, then come back here.
 
