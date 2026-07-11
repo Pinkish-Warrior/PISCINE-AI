@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PiscineAI — AI.GO Roadmap</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230d1117'/%3E%3Crect x='20' y='16' width='10' height='14' rx='3' fill='%23182130' stroke='%233fc7c1' stroke-width='3'/%3E%3Ccircle cx='25' cy='14' r='5' fill='%23ffb020'/%3E%3Crect x='16' y='30' width='68' height='54' rx='14' fill='%23182130' stroke='%233fc7c1' stroke-width='4'/%3E%3Ccircle cx='36' cy='54' r='7' fill='%23ffb020'/%3E%3Ccircle cx='64' cy='54' r='7' fill='%23ffb020'/%3E%3Crect x='38' y='68' width='24' height='6' rx='3' fill='%233fc7c1'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0d1117;
+    --panel:#131a23;
+    --panel-raised:#182130;
+    --paper:#e9edf3;
+    --paper-dim:#9aa7b8;
+    --amber:#ffb020;
+    --teal:#3fc7c1;
+    --line:rgba(233,237,243,0.10);
+    --line-strong:rgba(233,237,243,0.18);
+    --radius:14px;
+    --display:'Space Grotesk', sans-serif;
+    --body:'Inter', sans-serif;
+    --mono:'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 12% -10%, rgba(63,199,193,0.10), transparent 40%),
+      radial-gradient(circle at 88% 8%, rgba(255,176,32,0.08), transparent 45%),
+      var(--ink);
+    color:var(--paper);
+    font-family:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--teal);}
+  ::selection{background:var(--amber); color:#1a1200;}
+
+  /* ---------- shell ---------- */
+  .wrap{max-width:920px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- nav ---------- */
+  .topnav{
+    position:sticky; top:0; z-index:40;
+    background:rgba(13,17,23,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topnav .wrap{display:flex; align-items:center; justify-content:space-between; padding:14px 28px;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:var(--display); font-weight:700; letter-spacing:0.01em; font-size:16px;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--amber); box-shadow:0 0 0 3px rgba(255,176,32,0.18);}
+  .topnav nav{display:flex; gap:22px; font-size:13.5px;}
+  .topnav nav a{color:var(--paper-dim); text-decoration:none; font-weight:500;}
+  .topnav nav a:hover{color:var(--paper);}
+  @media (max-width:640px){ .topnav nav{display:none;} }
+
+  /* ---------- hero ---------- */
+  .hero{padding:76px 0 54px; position:relative; overflow:hidden;}
+  .eyebrow{
+    font-family:var(--mono); font-size:12.5px; color:var(--teal);
+    letter-spacing:0.14em; text-transform:uppercase; margin:0 0 18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--teal); display:inline-block;}
+  h1{
+    font-family:var(--display); font-weight:700; font-size:clamp(34px,6vw,58px);
+    line-height:1.04; margin:0 0 20px; letter-spacing:-0.01em;
+  }
+  h1 span{color:var(--amber);}
+  .hero p.lede{font-size:18px; color:var(--paper-dim); max-width:56ch; margin:0 0 30px;}
+  .hero-actions{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--body); font-weight:600; font-size:14px; text-decoration:none;
+    padding:12px 20px; border-radius:10px; display:inline-flex; align-items:center; gap:8px;
+    border:1px solid var(--line-strong); transition:border-color .15s ease, transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn.primary{background:var(--amber); color:#1a1200; border-color:var(--amber);}
+  .btn.ghost{color:var(--paper); }
+  .btn.ghost:hover{border-color:var(--teal); color:var(--teal);}
+
+  /* the robot signature mark */
+  .bot{
+    position:absolute; right:-10px; top:36px; width:190px; height:190px; opacity:0.95;
+    animation:float 5s ease-in-out infinite;
+  }
+  @media (max-width:760px){ .bot{display:none;} }
+  @keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  .bot .eye{ animation:blink 4.2s ease-in-out infinite; transform-origin:center; }
+  @keyframes blink{ 0%,92%,100%{transform:scaleY(1)} 95%{transform:scaleY(0.08)} }
+  .bot .arm{ animation:wave 2.6s ease-in-out infinite; transform-origin:50px 78px; }
+  @keyframes wave{ 0%,100%{transform:rotate(0deg)} 50%{transform:rotate(14deg)} }
+
+  section{padding:44px 0; border-top:1px solid var(--line);}
+  h2{
+    font-family:var(--display); font-weight:600; font-size:26px; margin:0 0 8px; letter-spacing:-0.01em;
+  }
+  .section-sub{color:var(--paper-dim); font-size:15px; margin:0 0 28px; max-width:64ch;}
+
+  /* ---------- start-here cards ---------- */
+  .cards{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  @media (max-width:720px){ .cards{grid-template-columns:1fr;} }
+  .card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:20px; position:relative;
+  }
+  .card .num{font-family:var(--mono); color:var(--teal); font-size:13px; margin-bottom:10px; display:block;}
+  .card h3{font-family:var(--display); font-size:17px; margin:0 0 8px;}
+  .card p{font-size:13.5px; color:var(--paper-dim); margin:0;}
+  .card code{font-family:var(--mono); font-size:12px; background:var(--panel-raised); padding:2px 6px; border-radius:5px; color:var(--paper);}
+
+  /* ---------- setup options ---------- */
+  .options{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media (max-width:720px){ .options{grid-template-columns:1fr;} }
+  .opt{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:22px;}
+  .opt h3{font-family:var(--display); font-size:16px; margin:0 0 4px; display:flex; align-items:center; gap:8px;}
+  .opt h3 .tag{font-family:var(--mono); font-size:11px; color:var(--ink); background:var(--teal); padding:2px 8px; border-radius:20px; font-weight:600;}
+  .opt ol{margin:14px 0 0; padding-left:20px; font-size:13.5px; color:var(--paper-dim);}
+  .opt li{margin-bottom:10px;}
+  .opt li strong{color:var(--paper); font-weight:600;}
+  pre{
+    font-family:var(--mono); font-size:12.5px; background:var(--panel-raised);
+    border:1px solid var(--line); border-radius:8px; padding:10px 12px; overflow-x:auto; color:var(--teal);
+    margin:8px 0;
+  }
+  .note{
+    margin-top:14px; padding:12px 14px; border-left:2px solid var(--amber);
+    background:rgba(255,176,32,0.06); font-size:12.5px; color:var(--paper-dim); border-radius:0 8px 8px 0;
+  }
+
+  /* ---------- checklist ---------- */
+  .checklist{list-style:none; margin:0; padding:0; display:grid; gap:10px;}
+  .checklist li{
+    display:flex; align-items:center; gap:12px; font-size:14px; color:var(--paper-dim);
+    background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px 16px;
+  }
+  .checklist li::before{
+    content:""; width:16px; height:16px; flex:0 0 16px; border-radius:5px;
+    border:1.5px solid var(--teal); background:transparent;
+  }
+
+  /* ---------- phases / timeline ---------- */
+  .phase{
+    border:1px solid var(--line); border-radius:var(--radius); margin-bottom:18px; overflow:hidden;
+    background:var(--panel);
+  }
+  .phase-head{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    padding:18px 22px; border-bottom:1px solid var(--line); background:var(--panel-raised);
+  }
+  .phase-head .ph-left{display:flex; align-items:center; gap:14px;}
+  .ph-num{
+    font-family:var(--display); font-weight:700; font-size:20px; color:var(--ink);
+    background:var(--amber); width:38px; height:38px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto;
+  }
+  .phase-head h3{font-family:var(--display); font-size:17px; margin:0;}
+  .phase-head .goal{font-size:12.5px; color:var(--paper-dim); margin-top:3px;}
+  .phase-head .count{font-family:var(--mono); font-size:11.5px; color:var(--teal); white-space:nowrap;}
+
+  table{width:100%; border-collapse:collapse; font-size:13.5px;}
+  thead th{
+    text-align:left; font-family:var(--mono); font-weight:500; font-size:11px;
+    color:var(--paper-dim); text-transform:uppercase; letter-spacing:0.06em;
+    padding:12px 22px 8px; border-bottom:1px solid var(--line);
+  }
+  tbody td{padding:11px 22px; border-bottom:1px solid var(--line); vertical-align:top;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody td.idx{font-family:var(--mono); color:var(--teal); width:34px;}
+  tbody td.ex code{font-family:var(--mono); font-size:12.5px; color:var(--paper); background:var(--panel-raised); padding:2px 7px; border-radius:5px;}
+  tbody td.learn{color:var(--paper-dim);}
+  .checkpoint{
+    display:flex; gap:10px; align-items:flex-start; padding:16px 22px; background:rgba(63,199,193,0.05);
+    border-top:1px solid var(--line); font-size:13px; color:var(--paper-dim);
+  }
+  .checkpoint .ck-tag{
+    font-family:var(--mono); font-size:10.5px; color:var(--ink); background:var(--teal);
+    padding:2px 8px; border-radius:20px; font-weight:600; flex:0 0 auto; margin-top:1px;
+  }
+
+  /* ---------- pace + tips ---------- */
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:720px){ .two-col{grid-template-columns:1fr;} }
+  .box{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:22px;}
+  .box h3{font-family:var(--display); font-size:16px; margin:0 0 14px;}
+  .pace-row{display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--line); font-size:13.5px;}
+  .pace-row:last-of-type{border-bottom:none;}
+  .pace-row .p-label{color:var(--paper-dim);}
+  .pace-row .p-val{font-family:var(--mono); color:var(--amber); font-weight:600;}
+  .tips{list-style:none; margin:0; padding:0; counter-reset:tip;}
+  .tips li{counter-increment:tip; position:relative; padding:0 0 14px 30px; font-size:13.5px; color:var(--paper-dim);}
+  .tips li:last-child{padding-bottom:0;}
+  .tips li::before{
+    content:counter(tip); position:absolute; left:0; top:0; font-family:var(--mono); font-size:11px;
+    color:var(--ink); background:var(--amber); width:19px; height:19px; border-radius:5px;
+    display:flex; align-items:center; justify-content:center; font-weight:700;
+  }
+  .tips li strong{color:var(--paper); font-weight:600;}
+
+  footer{padding:34px 0 60px; text-align:center;}
+  footer p{font-size:12.5px; color:var(--paper-dim); margin:4px 0;}
+  footer a{color:var(--paper-dim); text-decoration:underline; text-decoration-color:var(--line-strong);}
+
+  @media (prefers-reduced-motion: reduce){
+    .bot, .bot .eye, .bot .arm{animation:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span> PiscineAI</div>
+    <nav>
+      <a href="#start">Start</a>
+      <a href="#setup">Setup</a>
+      <a href="#phases">Roadmap</a>
+      <a href="#pace">Pace &amp; tips</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="hero" id="top">
+    <p class="eyebrow">01-edu · AI.GO curriculum</p>
+    <h1>Learn to code by<br>building a <span>robot.</span></h1>
+    <p class="lede">A beginner-friendly path through 01-edu's AI.GO curriculum — plain HTML, CSS and JavaScript, no prior coding experience required. 24 exercises, 4 phases, one animated robot at the end of it.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="#setup">Do the one-time setup →</a>
+      <a class="btn ghost" href="https://github.com/Pinkish-Warrior/PISCINE-AI" target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+
+    <svg class="bot" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
+      <rect x="30" y="34" width="40" height="34" rx="8" fill="#182130" stroke="#3fc7c1" stroke-width="1.5"/>
+      <circle class="eye" cx="42" cy="50" r="4" fill="#ffb020"/>
+      <circle class="eye" cx="58" cy="50" r="4" fill="#ffb020"/>
+      <rect x="46" y="58" width="8" height="3" rx="1.5" fill="#3fc7c1"/>
+      <rect x="46" y="14" width="8" height="16" rx="3" fill="#182130" stroke="#3fc7c1" stroke-width="1.5"/>
+      <circle cx="50" cy="12" r="4" fill="#ffb020"/>
+      <rect x="36" y="72" width="28" height="24" rx="6" fill="#182130" stroke="#3fc7c1" stroke-width="1.5"/>
+      <g class="arm">
+        <rect x="14" y="72" width="16" height="7" rx="3.5" fill="#182130" stroke="#3fc7c1" stroke-width="1.5"/>
+      </g>
+      <rect x="70" y="72" width="16" height="7" rx="3.5" fill="#182130" stroke="#3fc7c1" stroke-width="1.5"/>
+      <rect x="40" y="96" width="8" height="12" rx="3" fill="#182130" stroke="#3fc7c1" stroke-width="1.5"/>
+      <rect x="52" y="96" width="8" height="12" rx="3" fill="#182130" stroke="#3fc7c1" stroke-width="1.5"/>
+    </svg>
+  </section>
+
+  <section id="start">
+    <h2>Start here</h2>
+    <p class="section-sub">Three documents, read in order. Exercise tasks themselves live upstream in the 01-edu source repo — this project doesn't duplicate them.</p>
+    <div class="cards">
+      <div class="card">
+        <span class="num">01</span>
+        <h3>SETUP.md</h3>
+        <p>Do this first. One-time environment setup: editor, Git, an AI assistant, clone the repo, run a static site from the terminal.</p>
+      </div>
+      <div class="card">
+        <span class="num">02</span>
+        <h3>WORKFLOW.md</h3>
+        <p>Your day-to-day guide. All 24 exercises as tables, grouped into 4 phases, with checkpoints, pacing, and study tips.</p>
+      </div>
+      <div class="card">
+        <span class="num">03</span>
+        <h3>ROADMAP.md</h3>
+        <p>The same path as a Mermaid diagram, for anyone who'd rather see the whole flow at a glance.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="setup">
+    <h2>One-time setup</h2>
+    <p class="section-sub">The curriculum is plain HTML/CSS/JavaScript — no build tools, no <code style="font-family:var(--mono); background:var(--panel-raised); padding:2px 6px; border-radius:5px;">package.json</code>, nothing to compile. Pick the path that matches where you're working.</p>
+    <div class="options">
+      <div class="opt">
+        <h3>Option A <span class="tag">Own machine</span></h3>
+        <ol>
+          <li><strong>Install a code editor</strong> — VS Code, verified with <code style="font-family:var(--mono); background:var(--panel-raised); padding:1px 5px; border-radius:4px;">code --version</code>.</li>
+          <li><strong>Install Git</strong> — Homebrew, git-scm.com, or your distro's package manager.</li>
+          <li><strong>Clone the exercises repo</strong>
+            <pre>git clone https://github.com/01-edu/public.git
+cd public/subjects/AI.GO
+code .</pre>
+          </li>
+          <li><strong>Sign up for an AI assistant</strong> — every exercise README ends with a Prompt Example. claude.ai or chatgpt.com; an in-editor extension is optional but recommended.</li>
+          <li><strong>Run your code</strong> — opening <code style="font-family:var(--mono); background:var(--panel-raised); padding:1px 5px; border-radius:4px;">index.html</code> directly works early on, but <code style="font-family:var(--mono); background:var(--panel-raised); padding:1px 5px; border-radius:4px;">file://</code> can break <code style="font-family:var(--mono); background:var(--panel-raised); padding:1px 5px; border-radius:4px;">fetch</code> and ES modules later, so serve it:
+            <pre>npx serve .</pre>
+          </li>
+        </ol>
+      </div>
+      <div class="opt">
+        <h3>Option B <span class="tag">College machine</span></h3>
+        <ol>
+          <li><strong>Log in</strong> — username <code style="font-family:var(--mono); background:var(--panel-raised); padding:1px 5px; border-radius:4px;">student</code>, password <code style="font-family:var(--mono); background:var(--panel-raised); padding:1px 5px; border-radius:4px;">student</code>. VS Code, Git and Node are already installed.</li>
+          <li><strong>Clone the exercises repo</strong>
+            <pre>git clone https://github.com/01-edu/public.git
+cd public/subjects/AI.GO
+code .</pre>
+          </li>
+          <li><strong>Sign up for an AI assistant</strong> — same as Option A, claude.ai or chatgpt.com.</li>
+          <li><strong>Run your code</strong>
+            <pre>npx serve .</pre>
+          </li>
+        </ol>
+        <div class="note">Shared machine: log out of personal accounts (AI assistant, Gitea) at the end of a session, and confirm whether your repo clone gets pushed somewhere or is wiped between sessions.</div>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--display); font-size:16px; margin:32px 0 14px;">Verify your setup</h3>
+    <ul class="checklist">
+      <li><code style="font-family:var(--mono);">code --version</code> prints a version</li>
+      <li><code style="font-family:var(--mono);">git --version</code> prints a version</li>
+      <li><code style="font-family:var(--mono);">public/subjects/AI.GO</code> exists locally after cloning</li>
+      <li>AI assistant account created</li>
+      <li><code style="font-family:var(--mono);">npx serve .</code> (or opening <code style="font-family:var(--mono);">index.html</code>) shows a page in the browser</li>
+    </ul>
+  </section>
+
+  <section id="phases">
+    <h2>The roadmap</h2>
+    <p class="section-sub">24 exercises across 4 phases — each one building toward a fully animated, interactive robot with no template by the end.</p>
+
+    <div class="phase">
+      <div class="phase-head">
+        <div class="ph-left">
+          <div class="ph-num">1</div>
+          <div><h3>Foundations: HTML and CSS</h3><div class="goal">Get comfortable making things appear, move, and react on a page.</div></div>
+        </div>
+        <div class="count">4 exercises</div>
+      </div>
+      <table>
+        <thead><tr><th>#</th><th>Exercise</th><th>What you'll learn</th></tr></thead>
+        <tbody>
+          <tr><td class="idx">1</td><td class="ex"><code>first-hello</code></td><td class="learn">Show/hide text with a button — your first HTML + JS interaction</td></tr>
+          <tr><td class="idx">2</td><td class="ex"><code>first-move</code></td><td class="learn">Animate the robot with CSS transforms</td></tr>
+          <tr><td class="idx">3</td><td class="ex"><code>first-wink</code></td><td class="learn">Build simple interactive animations</td></tr>
+          <tr><td class="idx">4</td><td class="ex"><code>first-function</code></td><td class="learn">Write your first JavaScript function</td></tr>
+        </tbody>
+      </table>
+      <div class="checkpoint"><span class="ck-tag">Checkpoint</span> Can you explain, in your own words, what a CSS transform does and how a button click triggers JS code?</div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <div class="ph-left">
+          <div class="ph-num">2</div>
+          <div><h3>Core JavaScript Concepts</h3><div class="goal">Learn the building blocks every program is made of.</div></div>
+        </div>
+        <div class="count">6 exercises</div>
+      </div>
+      <table>
+        <thead><tr><th>#</th><th>Exercise</th><th>What you'll learn</th></tr></thead>
+        <tbody>
+          <tr><td class="idx">5</td><td class="ex"><code>declare-everything</code></td><td class="learn">Variable declaration &amp; scope</td></tr>
+          <tr><td class="idx">6</td><td class="ex"><code>play-with-variables</code></td><td class="learn">Data types and manipulating values</td></tr>
+          <tr><td class="idx">7</td><td class="ex"><code>i-win-arguments</code></td><td class="learn">Function parameters and arguments</td></tr>
+          <tr><td class="idx">8</td><td class="ex"><code>good-recipe</code></td><td class="learn">Writing clean, well-organized functions</td></tr>
+          <tr><td class="idx">9</td><td class="ex"><code>only-if</code></td><td class="learn">Conditional logic (if/else)</td></tr>
+          <tr><td class="idx">10</td><td class="ex"><code>listed</code></td><td class="learn">Arrays and lists</td></tr>
+        </tbody>
+      </table>
+      <div class="checkpoint"><span class="ck-tag">Checkpoint</span> Can you write a function that takes an argument, checks a condition, and loops over a list?</div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <div class="ph-left">
+          <div class="ph-num">3</div>
+          <div><h3>DOM Manipulation and Events</h3><div class="goal">Connect JavaScript to the page itself — read it, change it, style it dynamically.</div></div>
+        </div>
+        <div class="count">6 exercises</div>
+      </div>
+      <table>
+        <thead><tr><th>#</th><th>Exercise</th><th>What you'll learn</th></tr></thead>
+        <tbody>
+          <tr><td class="idx">11</td><td class="ex"><code>objects-around</code></td><td class="learn">JavaScript objects and properties</td></tr>
+          <tr><td class="idx">12</td><td class="ex"><code>call-it</code></td><td class="learn">Function invocation and callbacks</td></tr>
+          <tr><td class="idx">13</td><td class="ex"><code>class-it</code></td><td class="learn">Dynamic CSS classes</td></tr>
+          <tr><td class="idx">14</td><td class="ex"><code>select-then-style</code></td><td class="learn">Selecting DOM elements and styling them</td></tr>
+          <tr><td class="idx">15</td><td class="ex"><code>colorful-arms</code></td><td class="learn">CSS animations and transformations</td></tr>
+          <tr><td class="idx">16</td><td class="ex"><code>colorful-legs</code></td><td class="learn">Advanced styling techniques</td></tr>
+        </tbody>
+      </table>
+      <div class="checkpoint"><span class="ck-tag">Checkpoint</span> Can you select an element with JS and change its style/class based on user interaction?</div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <div class="ph-left">
+          <div class="ph-num">4</div>
+          <div><h3>Advanced Concepts</h3><div class="goal">Combine everything into more complex, stateful, multi-part programs.</div></div>
+        </div>
+        <div class="count">8 exercises</div>
+      </div>
+      <table>
+        <thead><tr><th>#</th><th>Exercise</th><th>What you'll learn</th></tr></thead>
+        <tbody>
+          <tr><td class="idx">17</td><td class="ex"><code>embedded-organs</code></td><td class="learn">Nested elements &amp; complex DOM structures</td></tr>
+          <tr><td class="idx">18</td><td class="ex"><code>glance-on-power</code></td><td class="learn">Operators and expressions</td></tr>
+          <tr><td class="idx">19</td><td class="ex"><code>robots-harmony</code></td><td class="learn">Managing state across multiple objects</td></tr>
+          <tr><td class="idx">20</td><td class="ex"><code>transform-objects</code></td><td class="learn">Object transformation methods</td></tr>
+          <tr><td class="idx">21</td><td class="ex"><code>star-forge</code></td><td class="learn">Complex animations and effects</td></tr>
+          <tr><td class="idx">22</td><td class="ex"><code>the-skeleton</code></td><td class="learn">Semantic HTML structure</td></tr>
+          <tr><td class="idx">23</td><td class="ex"><code>the-smooth-operator</code></td><td class="learn">Animation timing and smoothing</td></tr>
+          <tr><td class="idx">24</td><td class="ex"><code>JSPowered Mode</code></td><td class="learn">Advanced JavaScript, capstone-style</td></tr>
+        </tbody>
+      </table>
+      <div class="checkpoint"><span class="ck-tag">Checkpoint</span> Can you build a small feature end-to-end — HTML structure, CSS styling, JS behavior — without a template?</div>
+    </div>
+  </section>
+
+  <section id="pace">
+    <h2>Pace &amp; study tips</h2>
+    <p class="section-sub">Task instructions themselves live in <code style="font-family:var(--mono); background:var(--panel-raised); padding:2px 6px; border-radius:5px;">01-edu/public/subjects/AI.GO</code> — that's the source of truth, not duplicated here.</p>
+    <div class="two-col">
+      <div class="box">
+        <h3>Suggested pace</h3>
+        <div class="pace-row"><span class="p-label">Relaxed — 1 exercise/day</span><span class="p-val">~1 month</span></div>
+        <div class="pace-row"><span class="p-label">Intensive — 2 exercises/day</span><span class="p-val">~2 weeks</span></div>
+        <div class="pace-row"><span class="p-label">Between phases</span><span class="p-val">explain, don't just pass</span></div>
+      </div>
+      <div class="box">
+        <h3>Study tips for beginners</h3>
+        <ol class="tips">
+          <li><strong>Read before you code</strong> — understand the goal before touching the editor.</li>
+          <li><strong>Break things on purpose</strong> — change a value, see what happens.</li>
+          <li><strong>Use browser dev tools</strong> — console.log everything, inspect the DOM live.</li>
+          <li><strong>Don't skip phase 2</strong> — variables, conditionals, and arrays show up in every exercise after.</li>
+          <li><strong>Revisit earlier exercises</strong> once later ones make them click in hindsight.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>PiscineAI — beginner roadmap for 01-edu's AI.GO curriculum.</p>
+    <p><a href="https://github.com/Pinkish-Warrior/PISCINE-AI" target="_blank" rel="noopener">github.com/Pinkish-Warrior/PISCINE-AI</a></p>
+  </footer>
+</div>
+
+</body>
+</html>
