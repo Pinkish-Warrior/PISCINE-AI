@@ -1,18 +1,8 @@
 # AI.GO Beginner Roadmap
 
-A step-by-step path through the AI.GO curriculum (01-edu), built for students with **zero prior programming experience**. Table view of `ROADMAP.md`.
+A step-by-step path through the AI.GO curriculum (01-edu), built for students with **zero prior programming experience**. Table view of [`ROADMAP.md`](ROADMAP.md).
 
----
-
-## Before You Start
-
-- [ ] Install a text editor (VS Code recommended)
-- [ ] Install a modern browser (Chrome, Firefox, Safari, or Edge)
-- [ ] Install Git
-- [ ] Clone the repo: `git clone https://github.com/01-edu/public.git`
-- [ ] Confirm you have 2GB+ RAM and 500MB free storage
-
-No prior coding knowledge is needed — just basic computer literacy and an internet connection.
+Haven't done the one-time setup yet? Go do [`SETUP.md`](SETUP.md) first, then come back here.
 
 ---
 
@@ -98,6 +88,3 @@ Goal: combine everything into more complex, stateful, multi-part programs.
 4. **Don't skip the "boring" phase 2 exercises** — variables, conditionals, and arrays are used in every single exercise after them.
 5. **Revisit earlier exercises** after finishing later ones — they'll make more sense in hindsight.
 
----
-
-*Table view of `PiscineAI/ROADMAP.md`.*

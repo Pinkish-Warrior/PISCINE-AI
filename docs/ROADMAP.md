@@ -1,19 +1,31 @@
 # AI.GO Roadmap
 
-Visual learning path through the AI.GO curriculum (01-edu), based on `SUMMARY.md`.
+Visual learning path through the AI.GO curriculum (01-edu). Same content as [`ROADMAP_BEGINNERS.md`](ROADMAP_BEGINNERS.md), as a diagram instead of tables.
 
 ```mermaid
 flowchart TD
-    Start([Start: No coding experience needed]) --> Setup
+    Start([Start: No coding experience needed]) --> SetupChoice{{Own machine or<br/>college machine?}}
 
-    subgraph Setup["Setup"]
-        S1[Install text editor]
-        S2[Install browser]
-        S3[Install Git]
-        S4[Clone 01-edu/public repo]
+    SetupChoice -->|Own machine| SetupA
+    SetupChoice -->|College machine| SetupB
+
+    subgraph SetupA["Option A — Own machine"]
+        SA1[Install text editor]
+        SA2[Install Git]
+        SA3[Clone 01-edu/public repo]
+        SA4[Sign up for AI assistant]
+        SA1 --> SA2 --> SA3 --> SA4
     end
 
-    Setup --> P1
+    subgraph SetupB["Option B — College machine"]
+        SB1["Log in: student / student"]
+        SB2[Clone 01-edu/public repo]
+        SB3[Sign up for AI assistant]
+        SB1 --> SB2 --> SB3
+    end
+
+    SetupA --> P1
+    SetupB --> P1
 
     subgraph P1["Phase 1 — Foundations: HTML and CSS"]
         direction TB
@@ -65,4 +77,4 @@ flowchart TD
 
 ---
 
-*Diagram generated from `PiscineAI/SUMMARY.md`.*
+Haven't done the [setup](SETUP.md) yet? Do that first.
