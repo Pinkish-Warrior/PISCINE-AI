@@ -298,6 +298,12 @@ code .</pre>
         <h3>Option B <span class="tag">College machine</span></h3>
         <ol>
           <li><strong>Log in</strong> — username <code style="font-family:var(--mono); background:var(--panel-raised); padding:1px 5px; border-radius:4px;">student</code>, password <code style="font-family:var(--mono); background:var(--panel-raised); padding:1px 5px; border-radius:4px;">student</code>. VS Code, Git and Node are already installed.</li>
+          <li><strong>Verify the tools are there</strong> — quick check before you rely on them:
+            <pre>code --version
+git --version
+node --version</pre>
+            If any fail, install the missing one following Option A's steps for that tool.
+          </li>
           <li><strong>Clone the exercises repo</strong>
             <pre>git clone https://github.com/01-edu/public.git
 cd public/subjects/AI.GO

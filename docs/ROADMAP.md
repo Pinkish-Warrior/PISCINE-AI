@@ -19,9 +19,10 @@ flowchart TD
 
     subgraph SetupB["Option B — College machine"]
         SB1["Log in: student / student"]
-        SB2[Clone 01-edu/public repo]
-        SB3[Sign up for AI assistant]
-        SB1 --> SB2 --> SB3
+        SB2["Verify tools: code/git/node --version"]
+        SB3[Clone 01-edu/public repo]
+        SB4[Sign up for AI assistant]
+        SB1 --> SB2 --> SB3 --> SB4
     end
 
     SetupA --> P1

@@ -77,7 +77,19 @@ The college machines already have VS Code, Git, and Node.js installed — you're
 - **Username:** `student`
 - **Password:** `student`
 
-### 2. Open a terminal and clone the exercises repo
+### 2. Verify the tools are there
+
+Should already be installed — this is just a quick check before you rely on them:
+
+```bash
+code --version
+git --version
+node --version
+```
+
+If any of these fail, install the missing one following the [Option A steps](#option-a--your-own-machine) for that tool, then continue below.
+
+### 3. Open a terminal and clone the exercises repo
 
 ```bash
 git clone https://github.com/01-edu/public.git
@@ -85,14 +97,14 @@ cd public/subjects/AI.GO
 code .
 ```
 
-### 3. Sign up for an AI assistant
+### 4. Sign up for an AI assistant
 
 Same as Option A — every exercise README ends with a **Prompt Example**. Create an account with one:
 
 - [claude.ai](https://claude.ai)
 - [chatgpt.com](https://chatgpt.com)
 
-### 4. Running your code
+### 5. Running your code
 
 ```bash
 npx serve .
