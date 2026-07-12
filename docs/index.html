@@ -201,6 +201,25 @@
   }
   .tips li strong{color:var(--paper); font-weight:600;}
 
+  /* ---------- discord callout ---------- */
+  .discord{
+    display:flex; align-items:center; gap:26px;
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px 30px;
+  }
+  @media (max-width:640px){ .discord{flex-direction:column; text-align:center;} }
+  .discord img{
+    width:118px; height:118px; border-radius:10px; flex:0 0 auto;
+    background:#fff; padding:6px;
+  }
+  .discord .d-eyebrow{
+    font-family:var(--mono); font-size:12px; color:var(--teal);
+    letter-spacing:0.1em; text-transform:uppercase; margin:0 0 8px;
+  }
+  .discord h3{font-family:var(--display); font-size:19px; margin:0 0 8px;}
+  .discord p{font-size:13.5px; color:var(--paper-dim); margin:0 0 14px; max-width:48ch;}
+  @media (max-width:640px){ .discord p{margin-left:auto; margin-right:auto;} }
+
   footer{padding:34px 0 60px; text-align:center;}
   footer p{font-size:12.5px; color:var(--paper-dim); margin:4px 0;}
   footer a{color:var(--paper-dim); text-decoration:underline; text-decoration-color:var(--line-strong);}
@@ -227,6 +246,7 @@
     <div class="brand"><span class="dot"></span> PiscineAI</div>
     <nav>
       <a href="#start">Start</a>
+      <a href="#community">Discord</a>
       <a href="#setup">Setup</a>
       <a href="#phases">Roadmap</a>
       <a href="#pace">Pace &amp; tips</a>
@@ -279,6 +299,18 @@
         <span class="num">03</span>
         <h3>ROADMAP.md</h3>
         <p>The same path as a Mermaid diagram, for anyone who'd rather see the whole flow at a glance.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="community">
+    <div class="discord">
+      <img src="assets/discord-qr.png" alt="QR code to join the Fellowship Students Discord" width="118" height="118">
+      <div>
+        <p class="d-eyebrow">Don't do this alone</p>
+        <h3>Stuck on an exercise? Someone in here already un-stuck themselves.</h3>
+        <p>Scan the code to join <strong>Fellowship Students</strong> on Discord — trade tips, compare solutions, and vent about semicolons with people doing the exact same 24 exercises.</p>
+        <a class="btn primary" href="#setup">I'll join later, start setup →</a>
       </div>
     </div>
   </section>
