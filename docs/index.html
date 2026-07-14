@@ -132,6 +132,25 @@
     background:rgba(255,176,32,0.06); font-size:12.5px; color:var(--paper-dim); border-radius:0 8px 8px 0;
   }
 
+  /* ---------- advanced-only blur gate ---------- */
+  .opt.advanced-gate{position:relative;}
+  .opt.advanced-gate .gate-content{
+    filter:blur(4px); opacity:0.45; pointer-events:none; user-select:none;
+    transition:filter .25s ease, opacity .25s ease;
+  }
+  .opt.advanced-gate.revealed .gate-content{filter:none; opacity:1; pointer-events:auto;}
+  .gate-overlay{
+    position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:10px; text-align:center; padding:20px; cursor:pointer; border-radius:var(--radius);
+    background:rgba(19,26,35,0.35);
+  }
+  .opt.advanced-gate.revealed .gate-overlay{display:none;}
+  .gate-overlay .tag{
+    font-family:var(--mono); font-size:11px; color:var(--ink); background:var(--amber);
+    padding:3px 10px; border-radius:20px; font-weight:700; letter-spacing:0.03em;
+  }
+  .gate-overlay p{font-size:12.5px; color:var(--paper-dim); margin:0; max-width:24ch;}
+
   /* ---------- checklist ---------- */
   .checklist{list-style:none; margin:0; padding:0; display:grid; gap:10px;}
   .checklist li{
@@ -305,7 +324,7 @@
 
   <section id="community">
     <div class="discord">
-      <img src="assets/discord-qr.png" alt="QR code to join the Fellowship Students Discord" width="118" height="118">
+      <img src="assets/discord-qr.jpeg" alt="QR code to join the Fellowship Students Discord" width="118" height="118">
       <div>
         <p class="d-eyebrow">Don't do this alone</p>
         <h3>Stuck on an exercise? Someone in here already un-stuck themselves.</h3>
@@ -319,22 +338,28 @@
     <h2>One-time setup</h2>
     <p class="section-sub">The curriculum is plain HTML/CSS/JavaScript — no build tools, no <code style="font-family:var(--mono); background:var(--panel-raised); padding:2px 6px; border-radius:5px;">package.json</code>, nothing to compile. Pick the path that matches where you're working.</p>
     <div class="options">
-      <div class="opt">
-        <h3>Option A <span class="tag">Own machine</span></h3>
-        <ol>
-          <li><strong>Install a code editor</strong> — VS Code, verified with <code style="font-family:var(--mono); background:var(--panel-raised); padding:1px 5px; border-radius:4px;">code --version</code>.</li>
-          <li><strong>Install Git</strong> — Homebrew, git-scm.com, or your distro's package manager.</li>
-          <li><strong>Clone the exercises repo</strong>
-            <pre>git clone https://github.com/01-edu/public.git
+      <div class="opt advanced-gate" id="option-a">
+        <div class="gate-overlay">
+          <span class="tag">Advanced only</span>
+          <p>Own-machine setup assumes comfort with the terminal and installing tools yourself.</p>
+        </div>
+        <div class="gate-content">
+          <h3>Option A <span class="tag">Own machine</span></h3>
+          <ol>
+            <li><strong>Install a code editor</strong> — VS Code, verified with <code style="font-family:var(--mono); background:var(--panel-raised); padding:1px 5px; border-radius:4px;">code --version</code>.</li>
+            <li><strong>Install Git</strong> — Homebrew, git-scm.com, or your distro's package manager.</li>
+            <li><strong>Clone the exercises repo</strong>
+              <pre>git clone https://github.com/01-edu/public.git
 cd public/subjects/AI.GO
 code .</pre>
-          </li>
-          <li><strong>Sign up for an AI assistant</strong> — every exercise README ends with a Prompt Example. claude.ai or chatgpt.com; an in-editor extension is optional but recommended.</li>
-          <li><strong>Install Node.js</strong> — <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a>, verified with <code style="font-family:var(--mono); background:var(--panel-raised); padding:1px 5px; border-radius:4px;">node --version</code>. Needed once, for the next step.</li>
-          <li><strong>Run your code</strong> — opening <code style="font-family:var(--mono); background:var(--panel-raised); padding:1px 5px; border-radius:4px;">index.html</code> directly works early on, but <code style="font-family:var(--mono); background:var(--panel-raised); padding:1px 5px; border-radius:4px;">file://</code> can break <code style="font-family:var(--mono); background:var(--panel-raised); padding:1px 5px; border-radius:4px;">fetch</code> and ES modules later, so serve it:
-            <pre>npx serve .</pre>
-          </li>
-        </ol>
+            </li>
+            <li><strong>Sign up for an AI assistant</strong> — every exercise README ends with a Prompt Example. claude.ai or chatgpt.com; an in-editor extension is optional but recommended.</li>
+            <li><strong>Install Node.js</strong> — <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a>, verified with <code style="font-family:var(--mono); background:var(--panel-raised); padding:1px 5px; border-radius:4px;">node --version</code>. Needed once, for the next step.</li>
+            <li><strong>Run your code</strong> — opening <code style="font-family:var(--mono); background:var(--panel-raised); padding:1px 5px; border-radius:4px;">index.html</code> directly works early on, but <code style="font-family:var(--mono); background:var(--panel-raised); padding:1px 5px; border-radius:4px;">file://</code> can break <code style="font-family:var(--mono); background:var(--panel-raised); padding:1px 5px; border-radius:4px;">fetch</code> and ES modules later, so serve it:
+              <pre>npx serve .</pre>
+            </li>
+          </ol>
+        </div>
       </div>
       <div class="opt">
         <h3>Option B <span class="tag">College machine</span></h3>
@@ -502,6 +527,15 @@ code .</pre>
     </div>
   </footer>
 </div>
+
+<script>
+  // Flip to true to unblur and reveal Option A (advanced / own-machine setup).
+  const OPTION_A_VISIBLE = false;
+
+  if (OPTION_A_VISIBLE) {
+    document.getElementById('option-a').classList.add('revealed');
+  }
+</script>
 
 </body>
 </html>
